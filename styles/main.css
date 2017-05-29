@@ -61,10 +61,18 @@ html {
      color: rgb(233,50,117);
  }
 
+ .links-container .navbar-link:active{
+    background-color: white;
+ }
+
  .container{
    margin: 0 auto;
    max-width: 64em;
  }
+
+ .container.narrow {
+    max-width: 56rem;
+}
 
 @media (min-width: 640px) {
   html { font-size: 112%; }
