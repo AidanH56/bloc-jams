@@ -66,11 +66,38 @@
 
  var findParentByClassName = function(element, targetClass) {
     if (element) {
+
         var currentParent = element.parentElement;
+
         while (currentParent.className !== targetClass && currentParent.className !== null) {
             currentParent = currentParent.parentElement;
         }
         return currentParent;
+
+        if (currentParent('song-item-number').length > 0) {
+
+        } else if(currentParent('song-item-number').length < 0) {
+            console.log("No parent found");
+        } else {
+            console.log("No parent found with that class name");
+        }
+
+        /*var parentExists = document.getElementsByClassName('song-item-number');*/
+
+       /* if (parentExists.className !== targetClass && parentExists.className !== null) {
+            parentExists = parentExists.parentElement;
+        }
+        else {
+            console.log("No parent found with that class name");
+        }
+
+        return parentExists;*/
+
+         /*var currentParent = element.parentElement;
+        while (currentParent.className !== targetClass && currentParent.className !== null) {
+            currentParent = currentParent.parentElement;
+        }
+        return currentParent; */
     }
 };
 
