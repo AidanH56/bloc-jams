@@ -110,7 +110,6 @@ var getSongNumberCell = function(number) {
     var lastSongNumber = currentlyPlayingSongNumber;
 
     setSong(currentSongIndex + 1);
-    setSong(currentAlbum.songs[currentSongIndex]);
 
     updatePlayerBarSong();
 
