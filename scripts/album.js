@@ -159,6 +159,18 @@ var getSongNumberCell = function(number) {
  
              updateSeekPercentage($seekBar, seekBarFillRatio);
          });
+
+         /* Assignment 33 Part 1 */
+         var setCurrentTimeInPlayerBar = function(currentTime) {
+
+          // set the text of the element with the 
+          //.current-time class to the current time in the song.
+          if($(this).parent().attr('class') === '.current-time'){
+                
+
+          }
+         }
+
      }
  };
 
