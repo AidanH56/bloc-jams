@@ -28,6 +28,66 @@ var setSong = function(songNumber) {
      }
  };
 
+ /* Assignment 33 Part 1 */
+ var setCurrentTimeInPlayerBar = function(currentTime) {
+    
+    // set the text of the element with the 
+    //.current-time class to the current time in the song.
+            
+    //how can we get the current time of the current
+    //song playing?
+
+    //create a variable to act as a placeholder for the current
+    //element to perform the function
+    var $elementCurrentTime = $('.seek-control, .current-time');
+
+    //set the text using the variable mentioned above.
+    $elementCurrentTime.text(currentTime);        
+
+}
+
+/* Assignemtn 33 part 2*/
+
+var setTotalTimeInPlayerBar = function(totalTime) {
+    //sets the text of the element with the 
+    //.total-time class to the length of the song.
+
+    var $totalTimeElement = $('.seek-control, .total-time');
+    $totalTimeElement.text(totalTime);
+
+}
+
+/* Assignment 33 part 3 */
+
+var filterTimeCode = function(timeInSeconds) {
+
+    //use variables for the minutes and seconds
+    //use a variable to capture the seconds and another
+    //to convert to a whole number of seconds. 
+    var partialSeconds = Number.parseFloat(timeInSeconds);
+    var totalSeconds = Math.floor(partialSeconds);
+    var totalMinutes = Math.floor(totalSeconds / 60);
+
+    //Return the time in the format X:XX
+
+    //take into account remaining seconds from dividing total
+    //seconds by 60
+
+    var remainderOfSeconds = totalMinutes % 60;
+
+    var outputTime = totalMinutes + ':';
+
+    if(remainderOfSeconds < 10) {
+        outputTime =+ 0;
+    }
+
+    outputTime += remainderOfSeconds;
+
+    return outputTime;
+
+
+}
+
 
 var getSongNumberCell = function(number) {
     return $('.song-item-number[data-song-number="' + number + '"]');
@@ -38,7 +98,7 @@ var getSongNumberCell = function(number) {
         '<tr class="album-view-song-item">'
       + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
       + '  <td class="song-item-title">' + songName + '</td>'
-      + '  <td class="song-item-duration">' + songLength + '</td>'
+      + '  <td class="song-item-duration">' + filterTimeCode(songLength) + '</td>'
       + '</tr>'
       ;
 
@@ -149,6 +209,9 @@ var getSongNumberCell = function(number) {
          //timeupdate is a custom Buzz event that fires repeatedly 
          //while time elapses during song playback.
          currentSoundFile.bind('timeupdate', function(event) {
+
+            var currentTime = this.getTime();
+            var songLength = this.getDuration();
              
              // #11
              //We use Buzz's getTime() method to get the current time of 
@@ -158,18 +221,12 @@ var getSongNumberCell = function(number) {
              var $seekBar = $('.seek-control .seek-bar');
  
              updateSeekPercentage($seekBar, seekBarFillRatio);
+
+             //Assignment 33 parts 1 + 3
+             setCurrentTimeInPlayerBar($seekBar, seekBarFillRatio);
+             //Assignment 33 part 2
+             setTotalTimeInPlayerBar(filterTimeCode(currentTime));
          });
-
-         /* Assignment 33 Part 1 */
-         var setCurrentTimeInPlayerBar = function(currentTime) {
-
-          // set the text of the element with the 
-          //.current-time class to the current time in the song.
-          if($(this).parent().attr('class') === '.current-time'){
-                
-
-          }
-         }
 
      }
  };
@@ -391,5 +448,5 @@ $(document).ready(function() {
      setupSeekBars();
      $previousButton.click(prevSong);
      $nextButton.click(nextSong);
-     playerBarActions.click(togglePlayFromPlayerBar);
+     //playerBarActions.click(togglePlayFromPlayerBar);
 });
